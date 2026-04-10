@@ -17,4 +17,5 @@ model Game {
   rating        Int?
   playTime      Float?
   completedAt   DateTime?
+  createdAt     DateTime @default(now())
 }

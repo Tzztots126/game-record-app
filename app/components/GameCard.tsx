@@ -72,13 +72,13 @@ export default function GameCard({ game }: GameCardProps) {
             {game.tags.slice(0, 2).map((tag) => (
               <span
                 key={tag}
-                className="px-2 py-1 bg-[#1a0f2e] text-[#b8a5d9] font-pixel text-[8px] border-2 border-[#5d3d91]"
+                className="px-2 py-1 bg-[#1a0f2e] text-[#b8a5d9] font-game-name text-[12px] border-2 border-[#5d3d91]"
               >
                 {tag.toUpperCase()}
               </span>
             ))}
             {game.tags.length > 2 && (
-              <span className="text-[#ff6b9d] font-pixel text-[8px]">+{game.tags.length - 2}</span>
+              <span className="text-[#ff6b9d] font-game-name text-[12px]">+{game.tags.length - 2}</span>
             )}
           </div>
         </div>

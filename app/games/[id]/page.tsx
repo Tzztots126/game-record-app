@@ -209,7 +209,7 @@ export default function GameDetailPage() {
             {game.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-2 bg-[#1a0f2e] text-[#4ecdc4] font-pixel text-[10px] border-4 border-[#5d3d91]"
+                className="px-3 py-2 bg-[#1a0f2e] text-[#4ecdc4] font-game-name text-[12px] border-4 border-[#5d3d91]"
               >
                 {tag}
               </span>

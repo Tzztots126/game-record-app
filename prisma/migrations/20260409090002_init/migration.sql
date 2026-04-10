@@ -9,5 +9,6 @@ CREATE TABLE "Game" (
     "status" TEXT NOT NULL DEFAULT 'playing',
     "rating" INTEGER,
     "playTime" REAL,
-    "completedAt" DATETIME
+    "completedAt" DATETIME,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

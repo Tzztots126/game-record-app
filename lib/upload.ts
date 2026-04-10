@@ -1,6 +1,5 @@
 import { promises as fs } from 'fs'
 import path from 'path'
-import sharp from 'sharp'
 
 const UPLOAD_DIR = path.join(process.cwd(), 'public', 'uploads', 'games')
 
@@ -32,24 +31,19 @@ export async function ensureGameDir(gameId: string): Promise<void> {
   }
 }
 
-export async function processImage(
+export async function saveImage(
   buffer: Buffer,
   filename: string,
-  gameId: string,
-  options: { width?: number; height?: number; quality?: number } = {}
+  gameId: string
 ): Promise<string> {
   await ensureGameDir(gameId)
 
-  const { width = 800, quality = 80 } = options
   const ext = path.extname(filename).toLowerCase()
   const name = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
-  const outputFilename = `${name}.webp`
+  const outputFilename = `${name}${ext}`
   const outputPath = path.join(getGameDir(gameId), outputFilename)
 
-  await sharp(buffer)
-    .resize(width, undefined, { withoutEnlargement: true })
-    .webp({ quality })
-    .toFile(outputPath)
+  await fs.writeFile(outputPath, buffer)
 
   return `/uploads/games/${gameId}/${outputFilename}`
 }
@@ -59,7 +53,7 @@ export async function saveCoverImage(
   filename: string,
   gameId: string
 ): Promise<string> {
-  return processImage(buffer, filename, gameId, { width: 600, quality: 85 })
+  return saveImage(buffer, filename, gameId)
 }
 
 export async function saveScreenshot(
@@ -67,7 +61,7 @@ export async function saveScreenshot(
   filename: string,
   gameId: string
 ): Promise<string> {
-  return processImage(buffer, filename, gameId, { width: 1200, quality: 80 })
+  return saveImage(buffer, filename, gameId)
 }
 
 export async function deleteGameImages(gameId: string): Promise<void> {
