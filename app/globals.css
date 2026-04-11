@@ -10,7 +10,7 @@
 
 :root {
   --font-ark-pixel: 'Ark Pixel', system-ui, sans-serif;
-  --pixel-bg: #2d1b4e;
+  --pixel-bg: #7617bf;
   --pixel-surface: #462a75;
   --pixel-surface-light: #5d3d91;
   --pixel-accent: #ff6b9d;
@@ -42,7 +42,8 @@ body {
   font-family: var(--font-ark-pixel);
   font-size: 16px;
   line-height: 1.5;
-  background-image:
+  background-attachment: fixed;
+  /* background-image:
     radial-gradient(circle at 25% 25%, rgba(78, 205, 196, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 75% 75%, rgba(255, 107, 157, 0.1) 0%, transparent 50%),
     repeating-linear-gradient(
@@ -51,7 +52,23 @@ body {
       transparent 2px,
       rgba(0, 0, 0, 0.03) 2px,
       rgba(0, 0, 0, 0.03) 4px
-    );
+    ); */
+  background-image:
+    /* 新增层：CRT 屏幕边缘暗角 (Vignette) - 模拟老式显像管边缘变暗的物理特征 */
+    radial-gradient(circle at center, transparent 50%, rgba(0, 0, 0, 0.15) 100%),
+    /* 关键修复 2：改进的扫描线。放弃 repeating，改用普通的 linear-gradient 配合 background-size */
+    /* 这样浏览器渲染时能保证完美的像素对齐，绝不会出现线条粗细不均的割裂感 */
+    linear-gradient(0deg, rgba(0, 0, 0, 0.05) 50%, transparent 50%),
+    /* 原有层：青色光晕 (稍微提升了一点点透明度以匹配暗角) */
+    radial-gradient(circle at 25% 25%, rgba(78, 205, 196, 0.12) 0%, transparent 50%),
+    /* 原有层：粉色光晕 */
+    radial-gradient(circle at 75% 75%, rgba(255, 107, 157, 0.12) 0%, transparent 50%);
+  /* 分别控制每一层背景的尺寸 */
+  background-size:
+    100% 100%, /* 暗角：铺满屏幕 */
+    100% 4px,  /* 扫描线：宽度铺满，高度为 4px（这意味着 2px 黑线 + 2px 透明） */
+    100% 100%, /* 青色光晕：铺满屏幕 */
+    100% 100%; /* 粉色光晕：铺满屏幕 */
 }
 
 .font-pixel {
