@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import GameCard from './components/GameCard'
 import StatsPanel from './components/StatsPanel'
-
+import Image from 'next/image'
 interface Game {
   id: string
   name: string
@@ -61,7 +61,7 @@ export default function Home() {
 
         <div className="text-center relative z-10">
           <div className="flex justify-center gap-4 mb-4">
-            <span className="text-4xl animate-bounce" style={{ animationDelay: '0s' }}>🎮</span>
+            <span className="text-4xl animate-bounce" style={{ animationDelay: '0.2s' }}><Image src="/images/gamecontroller.png" alt="" width={80} height={80}/></span>
             <span className="text-4xl animate-bounce" style={{ animationDelay: '0.2s' }}>🕹️</span>
             <span className="text-4xl animate-bounce" style={{ animationDelay: '0.4s' }}>👾</span>
           </div>
@@ -83,9 +83,9 @@ export default function Home() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <span className="text-2xl">⭐</span>
-            <h2 className="font-pixel text-sm text-white" style={{ textShadow: '3px 3px 0 #1a0f2e' }}>
-              RECENT ADDITIONS
+            <Image src="/images/diamond.png" alt="" width={40} height={40}/>
+            <h2 className="font-pixel text-lg text-white" style={{ textShadow: '3px 3px 0 #1a0f2e' }}>
+              最近添加
             </h2>
           </div>
           <Link

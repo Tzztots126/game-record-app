@@ -1,15 +1,16 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
   const pathname = usePathname()
 
   const navItems = [
-    { href: '/', label: 'HOME', icon: '🏠' },
-    { href: '/games', label: 'GAME LIBRARY', icon: '🎮' },
-    { href: '/games/add', label: 'ADD', icon: '✨' },
+    { href: '/', label: '首页', icon: '/images/home.png' },
+    { href: '/games', label: '游戏库', icon: '/images/library.png' },
+    { href: '/games/add', label: '添加游戏', icon: '/images/controller.png' },
   ]
 
   return (
@@ -42,7 +43,7 @@ export default function Navbar() {
                       : 'bg-[#462a75] text-white border-4 border-[#1a0f2e] shadow-[4px_4px_0px_#1a0f2e] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#1a0f2e]'
                   }`}
                 >
-                  <span className="mr-2">{item.icon}</span>
+                  <Image src={item.icon} alt="" width={20} height={20} className="mr-2 inline-block" />
                   <span className="hidden sm:inline">{item.label}</span>
                 </Link>
               )
