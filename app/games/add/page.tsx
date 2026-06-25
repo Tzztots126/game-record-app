@@ -181,7 +181,7 @@ export default function AddGamePage() {
 
           {/* Comment */}
           <div>
-            <label className="block font-pixel text-[10px] text-[#b8a5d9] mb-2">
+            <label className="block font-pixel text-[10px] text-[#b8a5d9] mb-2">  
               COMMENT
             </label>
             <textarea

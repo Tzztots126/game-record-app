@@ -33,7 +33,7 @@ export default function Lightbox({ src, alt, isOpen, onClose }: LightboxProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#1a0f2e]/95"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#1a0f2e]/95 cursor-pointer"
       onClick={onClose}
     >
       {/* Pixel border frame */}

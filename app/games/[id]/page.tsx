@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -35,6 +35,20 @@ export default function GameDetailPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [lightboxSrc, setLightboxSrc] = useState('')
   const [lightboxAlt, setLightboxAlt] = useState('')
+  const deleteRef = useRef<HTMLDivElement>(null)
+
+  const handleClickOutside = useCallback((e: MouseEvent) => {
+    if (deleteRef.current && !deleteRef.current.contains(e.target as Node)) {
+      setDeleteConfirm(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (deleteConfirm) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [deleteConfirm, handleClickOutside])
 
   useEffect(() => {
     if (params.id) {
@@ -152,29 +166,30 @@ export default function GameDetailPage() {
               >
                 EDIT
               </Link>
-              {!deleteConfirm ? (
+              <div className="relative" ref={deleteRef}>
                 <button
-                  onClick={() => setDeleteConfirm(true)}
+                  onClick={() => setDeleteConfirm(!deleteConfirm)}
                   className="pixel-btn pixel-btn-danger"
                 >
                   DELETE
                 </button>
-              ) : (
-                <div className="flex gap-2">
-                  <button
-                    onClick={handleDelete}
-                    className="pixel-btn"
-                  >
-                    CONFIRM
-                  </button>
-                  <button
-                    onClick={() => setDeleteConfirm(false)}
-                    className="pixel-btn pixel-btn-secondary"
-                  >
-                    CANCEL
-                  </button>
-                </div>
-              )}
+                {deleteConfirm && (
+                  <div className="absolute top-full right-0 mt-2 z-10 bg-[#1a0f2e] border-4 border-[#5d3d91] shadow-[4px_4px_0px_#1a0f2e] p-3 flex flex-col gap-2 min-w-[140px]">
+                    <button
+                      onClick={handleDelete}
+                      className="pixel-btn w-full text-center"
+                    >
+                      CONFIRM
+                    </button>
+                    <button
+                      onClick={() => setDeleteConfirm(false)}
+                      className="pixel-btn pixel-btn-secondary w-full text-center"
+                    >
+                      CANCEL
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 

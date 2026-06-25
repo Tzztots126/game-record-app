@@ -60,11 +60,6 @@ export default function Home() {
         <div className="absolute bottom-4 right-4 w-4 h-4 bg-[#95e1d3]" />
 
         <div className="text-center relative z-10">
-          <div className="flex justify-center gap-4 mb-4">
-            <span className="text-4xl animate-bounce" style={{ animationDelay: '0.2s' }}><Image src="/images/gamecontroller.png" alt="" width={80} height={80}/></span>
-            <span className="text-4xl animate-bounce" style={{ animationDelay: '0.2s' }}>🕹️</span>
-            <span className="text-4xl animate-bounce" style={{ animationDelay: '0.4s' }}>👾</span>
-          </div>
           <h1 className="font-pixel text-2xl sm:text-3xl text-white mb-4" style={{ textShadow: '4px 4px 0 #1a0f2e' }}>
             GAME<span className="text-[#4ecdc4]">TRACK</span>
           </h1>

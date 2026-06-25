@@ -32,7 +32,11 @@ export default function Navbar() {
           {/* Navigation */}
           <div className="flex items-center gap-2 sm:gap-4">
             {navItems.map((item) => {
-              const isActive = pathname === item.href || pathname?.startsWith(item.href + '/')
+              const isActive = item.href === '/games'
+                ? pathname === '/games' || (pathname?.startsWith('/games/') && !pathname.startsWith('/games/add') && !pathname?.match(/^\/games\/[^/]+\/edit/))
+                : item.href === '/games/add'
+                  ? pathname === '/games/add' || pathname?.match(/^\/games\/[^/]+\/edit/)
+                  : pathname === item.href
               return (
                 <Link
                   key={item.href}
